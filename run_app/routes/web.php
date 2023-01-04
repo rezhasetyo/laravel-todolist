@@ -23,3 +23,5 @@ Route::get('/', function () {
 Route::resource('/kategori', KategoriController::class);
 Route::resource('/tanggal', TanggalController::class);
 Route::resource('/todolist', TodolistController::class);
+
+Route::get('tanggal/total-jam/{id}', [TanggalController::class, 'totalJam']);

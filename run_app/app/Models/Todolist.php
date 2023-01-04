@@ -15,7 +15,7 @@ class Todolist extends Model
         return $this->belongsTo(Kategori::class); 
     }
 
-    public function tanggal(){
-        return $this->belongsTo(Tanggal::class); 
+    public function tanggalmod(){
+        return $this->belongsTo(Tanggal::class, 'tanggal_id'); 
     }
 }

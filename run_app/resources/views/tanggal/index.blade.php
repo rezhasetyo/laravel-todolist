@@ -24,7 +24,7 @@
                             <tr>
                                 <th scope="col" class="col-3">Tanggal</th>
                                 <th scope="col" class="col-2">Total Jam</th>
-                                <th scope="col" class="col-2">Action</th>
+                                <th scope="col" class="col-3">Action</th>
                             </tr>
                         </thead>
 
@@ -32,13 +32,16 @@
                             @foreach($datas as $key=>$value)
                             <tr>
                                 <td>{{ showDateTime1($value->tanggal) }}</td>
-                                <td></td>
+                                <td>{{ $value->total ?? '0'}} Jam</td>
                                 <td>
                                     <!-- Button Modal Edit -->
                                     <a class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#editModal{{ $value->id }}">Edit</a>
                 
                                     <!-- Button Modal Delete -->
                                     <a class="btn btn-danger btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $value->id }}">Delete</a>
+
+                                    <!-- Button Perhitungan Total Jam -->
+                                    <a class="btn btn-success btn-sm" href="{{ url('tanggal/total-jam/'. $value->id) }}">Hitung Total Jam</a>
                                 </td>
                             </tr>
                             @endforeach
