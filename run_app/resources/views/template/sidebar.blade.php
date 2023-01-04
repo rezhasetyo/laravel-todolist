@@ -14,15 +14,15 @@
       </a>
       <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
-          <a href="api/film">
+          <a href="{{ url( '/kategori')}}">
             <i class="bi bi-circle"></i><span>Kategori</span>
           </a>
         </li>
         <li>
-          <a href="api/genre">
+          <a href="{{ url( '/tanggal')}}">
             <i class="bi bi-circle"></i><span>Tanggal</span>
           </a>
-          <a href="api/film">
+          <a href="{{ url( '/todolist')}}">
             <i class="bi bi-circle"></i><span>Todo List</span>
           </a>
         </li>

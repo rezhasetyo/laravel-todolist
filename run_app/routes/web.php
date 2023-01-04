@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\TanggalController;
+use App\Http\Controllers\TodolistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 });
+
+Route::resource('/kategori', KategoriController::class);
+Route::resource('/tanggal', TanggalController::class);
+Route::resource('/todolist', TodolistController::class);
