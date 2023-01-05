@@ -6,24 +6,32 @@ use Illuminate\Http\Request;
 use App\Models\Tanggal;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
+use Auth;
 
 class TanggalController extends Controller
-{
+{   
+    public function __construct()   {
+        $this->middleware('auth')->except(['index']);
+    }
+
     public function index(){
-        $datas = Tanggal::all();
+        if (Auth::user()) {
+            $datas = Tanggal::where('user_id', auth()->id())->get();
+        } else {
+            $datas = Tanggal::where('user_id', "999")->get();
+        }
+        
         return view('tanggal.index', compact('datas'));
     }
 
     public function store(Request $request){
         $request->validate(
-            ['tanggal' => 'required|unique:tanggal']
-            ,
-            ['tanggal.required' => 'Tanggal harus diisi !',
-            'tanggal.unique' => 'Tanggal sudah ada']
+            ['tanggal' => 'required'],   ['tanggal.required' => 'Tanggal harus diisi !']
         );
         
         $model = new Tanggal;
         $model->tanggal = $request->tanggal;
+        $model->user_id = Auth::user()->id;
         $model->save();
         Alert::success('Sukses', 'Berhasil Menambahkan Data');
         return redirect('tanggal');
@@ -31,14 +39,12 @@ class TanggalController extends Controller
 
     public function update(Request $request, $id){
         $request->validate(
-            ['tanggal' => 'required|unique:tanggal']
-            ,
-            ['tanggal.required' => 'Tanggal harus diisi !',
-            'tanggal.unique' => 'Tanggal sudah ada']
+            ['tanggal' => 'required'],   ['tanggal.required' => 'Tanggal harus diisi !']
         );
         
         $model = Tanggal::find($id);
         $model->tanggal = $request->tanggal;
+        $model->user_id = Auth::user()->id;
         $model->save();
         Alert::success('Sukses', 'Berhasil Mengedit Data');
         return redirect('tanggal');

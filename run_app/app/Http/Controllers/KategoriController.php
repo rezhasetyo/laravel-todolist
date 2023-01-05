@@ -5,11 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Kategori;
 use RealRashid\SweetAlert\Facades\Alert;
+use Auth;
 
 class KategoriController extends Controller
-{
+{   
+    public function __construct()   {
+        $this->middleware('auth')->except(['index']);
+    }
+
     public function index(){
-        $datas = Kategori::all();
+        if (Auth::user()) {
+            $datas = Kategori::where('user_id', auth()->id())->get();
+        } else {
+            $datas = Kategori::where('user_id', "999")->get();
+        }
+        
         return view('kategori.index', compact('datas'));
     }
 
@@ -19,6 +29,7 @@ class KategoriController extends Controller
         
         $model = new Kategori;
         $model->nama = $request->nama;
+        $model->user_id = Auth::user()->id;
         $model->save();
         Alert::success('Sukses', 'Berhasil Menambahkan Data');
         return redirect('kategori');
@@ -30,6 +41,7 @@ class KategoriController extends Controller
         
         $model = Kategori::find($id);
         $model->nama = $request->nama;
+        $model->user_id = Auth::user()->id;
         $model->save();
         Alert::success('Sukses', 'Berhasil Mengedit Data');
         return redirect('kategori');

@@ -25,3 +25,6 @@ Route::resource('/tanggal', TanggalController::class);
 Route::resource('/todolist', TodolistController::class);
 
 Route::get('tanggal/total-jam/{id}', [TanggalController::class, 'totalJam']);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

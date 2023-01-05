@@ -8,13 +8,26 @@ use App\Models\Tanggal;
 use App\Models\Todolist;
 // use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
+use Auth;
 
 class TodolistController extends Controller
-{
+{   
+    public function __construct()   {
+        $this->middleware('auth')->except(['index']);
+    }
+
     public function index(){
-        $datas      = Todolist::all();
-        $kategori   = Kategori::all();
-        $tanggal    = Tanggal::all();
+        if (Auth::user()) {
+            $datas      = Todolist::where('user_id', auth()->id())->get();
+            $kategori   = Kategori::where('user_id', auth()->id())->get();
+            $tanggal    = Tanggal::where('user_id', auth()->id())->get();
+        } else {
+            $datas      = Todolist::where('user_id', "999")->get();
+            $kategori   = Kategori::where('user_id', "999")->get();
+            $tanggal    = Tanggal::where('user_id', "999")->get();
+        }
+        
+        
         return view('todolist.index', compact('datas', 'kategori', 'tanggal'));
     }
 
@@ -36,6 +49,7 @@ class TodolistController extends Controller
         $model->durasi = $request->durasi;
         $model->kategori_id = $request->kategori_id;
         $model->tanggal_id = $request->tanggal_id;
+        $model->user_id = Auth::user()->id;
         $model->save();
 
         Alert::success('Sukses', 'Berhasil Menambahkan Data');
@@ -60,6 +74,7 @@ class TodolistController extends Controller
         $model->durasi = $request->durasi;
         $model->kategori_id = $request->kategori_id;
         $model->tanggal_id = $request->tanggal_id;
+        $model->user_id = Auth::user()->id;
         $model->save();
 
         // $tanggal = Tanggal::find($request->tanggal_id);

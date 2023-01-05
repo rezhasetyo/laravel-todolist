@@ -18,4 +18,8 @@ class Todolist extends Model
     public function tanggalmod(){
         return $this->belongsTo(Tanggal::class, 'tanggal_id'); 
     }
+
+    public function user(){
+        return $this->belongsTo(User::class); 
+    }
 }

@@ -31,7 +31,7 @@
                         <tbody>
                             @foreach($datas as $key=>$value)
                             <tr>
-                                <td>{{ $value->id }}</td>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $value->nama }}</td>
                                 <td>
                                     <!-- Button Modal Edit -->

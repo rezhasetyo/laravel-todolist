@@ -23,6 +23,8 @@ return new class extends Migration
             $table->foreign('kategori_id')->references('id')->on('kategori');
             $table->unsignedBigInteger('tanggal_id');     
             $table->foreign('tanggal_id')->references('id')->on('tanggal');
+            $table->unsignedBigInteger('user_id');     
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

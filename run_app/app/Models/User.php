@@ -41,4 +41,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // RELASI ANTAR MODEL
+        public function todolist(){
+            return $this->hasMany(Todolist::class); 
+        }
+
+        public function tanggal(){
+            return $this->hasMany(Tanggal::class); 
+        }
+
+        public function kategori(){
+            return $this->hasMany(Kategori::class); 
+        }
 }
