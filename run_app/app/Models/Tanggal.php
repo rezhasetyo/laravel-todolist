@@ -10,7 +10,7 @@ class Tanggal extends Model
     use HasFactory;
     protected $table    = 'tanggal';
     protected $fillable = ['tanggal', 'total'];
-    protected $dates    = ['tanggal'];
+    protected $casts = [ 'tanggal'=>'datetime'];
 
     public function todolist(){
         return $this->hasMany(Todolist::class); 
