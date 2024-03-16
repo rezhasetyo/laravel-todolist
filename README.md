@@ -1,7 +1,7 @@
 # Dokumentasi
 
-### Laravel Framework 10.2.0
-### PHP 8.2.3 Development Server
+### Laravel Framework 11.0.7
+### PHP 8.3.4 Development Server
 
 <br>
 
